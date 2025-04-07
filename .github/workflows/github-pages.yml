@@ -1,31 +1,31 @@
-name: Build and Deploy Jekyll Site
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main] 
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Check out the repository
+        uses: actions/checkout@v2
 
-      - name: Setup Ruby
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1
-          bundler-cache: true
+          ruby-version: "3.3.4"
 
-      - name: Install dependencies
-        run: bundle install
-
-      - name: Build Jekyll site
-        run: bundle exec jekyll build
+      - name: Install dependencies & build site
+        uses: limjh16/jekyll-action-ts@v2
+        with:
+          enable_cache: true
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.CUSTOM_GITHUB_TOKEN  }}
           publish_dir: ./_site
-          publish_branch: gh-pages
