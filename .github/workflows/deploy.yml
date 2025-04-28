@@ -1,33 +1,33 @@
-name: Build and Deploy Jekyll site manually
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main 
+      - main
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Check out the repository
+        uses: actions/checkout@v2
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0 
+          ruby-version: "3.3.4"
+          bundler-cache: true # This caches dependencies
 
-      - name: Install dependencies
+      - name: Install dependencies & build site
         run: |
-          gem install bundler
           bundle install
-
-      - name: Build Jekyll Site
-        run: bundle exec jekyll build
+          bundle exec jekyll build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
+          publish_branch: gh-pages
