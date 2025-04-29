@@ -3,7 +3,7 @@ url: https://smyeong123.github.io
 author: Sangmyeong Lee
 email: sangmyeonglee123@gmail.com
 description: > # this means to ignore newlines until "show_exerpts:"
-  I am a graduate student at the University of Sydney, majoring in Computer Science with a minor in Software Development. 
+  I am a Bachelor of Science graduate at the University of Sydney, majoring in Computer Science with a minor in Software Development. 
   My interests include backend development in Java, as well as artificial intelligence, particularly in natural language processing (NLP), computer vision (CV), and multimodal learning.
 show_excerpts: false # set to true to show excerpts on the homepage
 
@@ -22,7 +22,7 @@ dash:
 
   # (optional) discqus comment configuration
   disqus:
-    shortname: smyeong123-github-io
+    shortname: smyeong123
 
   # generate social links in footer
   # supported colors: green, red, orange, blue, cyan, pink, teal, yellow, indigo, purple
