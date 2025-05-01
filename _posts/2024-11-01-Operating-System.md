@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Operating System Note"
+title:  "[KR] Operating System Note"
 tags: CS OS
 ---
 
