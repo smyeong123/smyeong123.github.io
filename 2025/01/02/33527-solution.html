@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html class="direction--ltr"lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[KR] 백준 33527 - 신촌 길찾기 서비스 | smyeong123</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="[KR] 백준 33527 - 신촌 길찾기 서비스" />
+<meta name="author" content="Sangmyeong Lee" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="백준 33527 - 신촌 길찾기 서비스 해당 문제는 BFS로 접근했다가 실패해 Floyd-Warshall 기법으로 푼 문제입니다." />
+<meta property="og:description" content="백준 33527 - 신촌 길찾기 서비스 해당 문제는 BFS로 접근했다가 실패해 Floyd-Warshall 기법으로 푼 문제입니다." />
+<link rel="canonical" href="https://smyeong123.github.io/2025/01/02/33527-solution.html" />
+<meta property="og:url" content="https://smyeong123.github.io/2025/01/02/33527-solution.html" />
+<meta property="og:site_name" content="smyeong123" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="[KR] 백준 33527 - 신촌 길찾기 서비스" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sangmyeong Lee"},"dateModified":"2025-01-02T00:00:00+00:00","datePublished":"2025-01-02T00:00:00+00:00","description":"백준 33527 - 신촌 길찾기 서비스 해당 문제는 BFS로 접근했다가 실패해 Floyd-Warshall 기법으로 푼 문제입니다.","headline":"[KR] 백준 33527 - 신촌 길찾기 서비스","mainEntityOfPage":{"@type":"WebPage","@id":"https://smyeong123.github.io/2025/01/02/33527-solution.html"},"url":"https://smyeong123.github.io/2025/01/02/33527-solution.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="stylesheet" href="/assets/css/magnific-popup.css"><link type="application/atom+xml" rel="alternate" href="https://smyeong123.github.io/feed.xml" title="smyeong123" /><script src="https://code.jquery.com/jquery-3.2.0.min.js"></script> 
+  <script src="/assets/js/jquery.magnific-popup.js"></script>
+</head>
+<body><div class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">smyeong123<b class="command_prompt"></b><b class="blinking_cursor">_</b></a>
+    <span class="social_links">
+        
+        
+        <a class="color-cyan-hover" href="https://github.com/smyeong123"><i class="fab fa-github-square"></i></a>
+        
+        
+        
+        <a class="color-red-hover" href="https://linkedin.com/in/sangmyeong-lee-813996208"><i class="fab fa-linkedin"></i></a>
+        
+        
+    </span>
+  </div>
+</div>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        
+  <div class="author-box">
+
+
+<img src="
+    https://gravatar.com/avatar/aa28aa0a9897f29b7ef89578f5018bbb?s=256
+" class="author-avatar" alt="Avatar" />
+<div class="description">I am a Bachelor of Science graduate at the University of Sydney, majoring in Computer Science with a minor in Software Development.  My interests include backend development in Java, as well as artificial intelligence, particularly in natural language processing (NLP), computer vision (CV), and multimodal learning.
+</div>
+
+</div>
+
+
+<div class="post">
+  <h1 class="post-title">[KR] 백준 33527 - 신촌 길찾기 서비스</h1>
+  
+  <div class="post-tags">
+      
+      <a class="tag" href="/tag/ps/">PS</a>
+      
+      <a class="tag" href="/tag/graph/">graph</a>
+      
+      <a class="tag" href="/tag/folyd-warshall/">folyd-warshall</a>
+      
+  </div>
+  
+  <div class="post-date">
+    Published on 02 Jan 2025
+    
+  </div>
+  
+  <h1 id="백준-33527---신촌-길찾기-서비스">백준 33527 - 신촌 길찾기 서비스</h1>
+<blockquote>
+  <p>해당 문제는 BFS로 접근했다가 실패해 Floyd-Warshall 기법으로 푼 문제입니다.</p>
+</blockquote>
+
+<h2 id="문제-설명"><strong>문제 설명</strong></h2>
+<p>5개의 대학교에 $N$개의 버스 정류장이 있으며, 각 대학교는 자체적으로 $X$개의 버스 노선을 운영합니다.<br />
+서로 다른 대학교에서 운영하는 동일한 번호의 버스 노선은 <strong>서로 다른 노선</strong>이므로, <strong>총 $5X$개의 고유한 버스 노선이 존재</strong>합니다.</p>
+
+<hr />
+
+<h2 id="문제-풀이"><strong>문제 풀이</strong></h2>
+<p>초기에는 BFS를 사용하여 <strong>$N \times N$ 크기의 버스 노선 정보를 기반으로 탐색</strong>하는 방식을 시도했습니다.<br />
+그러나 $N$의 최대 크기가 $100,000$으로 매우 크기 때문에, 이 방식은 <strong>비효율적이며 시간 초과가 발생</strong>합니다.<br />
+반면, $X$의 최대 크기는 $100$으로 상대적으로 작아, <strong>$X$를 기준으로 최적화하는 방법이 더 효율적</strong>임을 알 수 있습니다.</p>
+
+<p>이를 해결하기 위해, <strong>각 대학교의 버스 노선을 고유하게 변환</strong>하여 처리하였습니다.<br />
+$new_route_number = route_number + route_index * X - 1$ 연산을 사용하여 <strong>각 대학교의 노선을 고유한 번호로 매핑</strong>했습니다.</p>
+
+<h3 id="1-인접-행렬-초기화"><strong>1. 인접 행렬 초기화</strong></h3>
+<p>$5X \times 5X$ 크기의 2D <code class="language-plaintext highlighter-rouge">bus</code> 행렬을 생성하여,<br />
+정류장 $i$에서 정류장 $j$로 이동할 때 필요한 <strong>최소 환승 횟수를 저장</strong>합니다.<br />
+각 버스 노선에서 <strong>직접 연결된 정류장은 환승 없이 이동 가능</strong>하므로 <code class="language-plaintext highlighter-rouge">bus[i][j] = 1</code>로 설정합니다.</p>
+
+<hr />
+
+<h3 id="2-floyd-warshall-알고리즘-적용"><strong>2. Floyd-Warshall 알고리즘 적용</strong></h3>
+<p>이제 <strong>Floyd-Warshall 알고리즘</strong>을 사용하여 <strong>모든 정류장 간 최소 환승 횟수를 계산</strong>합니다.<br />
+점화식은 다음과 같습니다:
+\(bus[i][j] = min(bus[i][j], bus[i][k] + bus[k][j])\)</p>
+
+<p>여기서,</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">bus[i][j]</code> : 정류장 $i$에서 정류장 $j$까지의 최소 환승 횟수</li>
+  <li><code class="language-plaintext highlighter-rouge">bus[i][k] + bus[k][j]</code> : 정류장 $i$에서 $k$를 거쳐 $j$로 가는 경우</li>
+</ul>
+
+<p>이 과정을 <strong>$5X$번 반복</strong>하여 <strong>모든 정류장 쌍 간의 최소 환승 횟수를 계산</strong>합니다.</p>
+
+<hr />
+
+<h3 id="3-쿼리-처리"><strong>3. 쿼리 처리</strong></h3>
+<p>Floyd-Warshall 알고리즘이 끝난 후,  질문 수 $Q$를 입력받고, 각 질문마다 <strong>출발 정류장 $U_i$와 도착 정류장 $V_i$</strong>를 받습니다.<br />
+이미 구해둔 <code class="language-plaintext highlighter-rouge">bus</code> 행렬을 활용하여 <strong>$U_i$에서 $V_i$까지 가는 최소 환승 횟수를 찾고 출력</strong>합니다.</p>
+
+<hr />
+
+<h2 id="시간-복잡도-분석"><strong>시간 복잡도 분석</strong></h2>
+<p>Floyd-Warshall 알고리즘의 시간 복잡도는 <strong>$O(V^3)$</strong>이며,<br />
+여기서 $V = 5X$이므로 전체 시간 복잡도는:  $O(5X^3) = O(X^3)$
+따라서, <strong>$N$이 커도 $X$가 작기 때문에 충분히 효율적인 방식</strong>입니다.</p>
+
+<h2 id="코드">코드</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span>
+
+<span class="n">N</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
+<span class="n">routes</span> <span class="o">=</span> <span class="p">[[</span><span class="n">r</span> <span class="o">+</span> <span class="n">j</span> <span class="o">*</span> <span class="n">X</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()))]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+<span class="n">sz</span><span class="p">,</span> <span class="n">INF</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">X</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s">'inf'</span><span class="p">)</span>
+<span class="n">bus</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="k">else</span> <span class="n">INF</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">routes</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">bus</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># Floyd-Warshall Algorithm
+</span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">bus</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">INF</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">):</span>
+                <span class="n">bus</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bus</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">bus</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">bus</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+
+<span class="n">Q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Q</span><span class="p">):</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">()))</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">min</span><span class="p">((</span><span class="n">bus</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">routes</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">routes</span><span class="p">[</span><span class="n">v</span><span class="p">]),</span> <span class="n">default</span><span class="o">=</span><span class="n">INF</span><span class="p">)</span>
+    <span class="n">sys</span><span class="p">.</span><span class="n">stdout</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">res</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">res</span> <span class="o">&lt;</span> <span class="n">INF</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+
+
+<div class="comments">
+<div id="disqus_thread"></div>
+<script>
+ var disqus_config = function () {
+     this.page.url = 'https://smyeong123.github.io/2025/01/02/33527-solution.html';
+     this.page.identifier = '/2025/01/02/33527-solution';
+     this.page.title = '[KR] 백준 33527 - 신촌 길찾기 서비스';
+ };
+
+ (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+     var d = document, s = d.createElement('script');
+
+     s.src = '//smyeong123.disqus.com/embed.js';
+
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+</div>
+
+
+
+
+<div class="related">
+  <h2>related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2025/02/01/14003-solution.html">
+            [KR] 백준 14003 - 가장 긴 증가하는 부분 수열 5
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2025/01/18/9935-solution.html">
+            [KR] 백준 9935 - 문자열 폭발
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2024/11/01/Operating-System.html">
+            [KR] Operating System Note
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+  
+  <h2>all tags</h2>
+  <div class="tag-cloud"><a href="/tag/cs/" class="set-1">CS</a> <a href="/tag/dp/" class="set-1">DP</a> <a href="/tag/lis/" class="set-1">LIS</a> <a href="/tag/os/" class="set-1">OS</a> <a href="/tag/ps/" class="set-5">PS</a> <a href="/tag/folyd-warshall/" class="set-1">folyd-warshall</a> <a href="/tag/graph/" class="set-1">graph</a> <a href="/tag/stack/" class="set-1">stack</a></div>
+  
+
+
+
+
+<script>
+  let i = 0;
+  const text = '';
+  const speed = parseInt('50');
+  
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById('animated-post-description').innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+
+  document.getElementById('animated-post-description').style.display = 'initial';
+  typeWriter();
+
+  // Image modal
+  var $imgs = [];
+  $('img').each(function(idx) {
+    var obj = {
+      src: $(this).attr('src')
+    }
+    $imgs.push(obj);
+    var elem = $(this);
+    $(this).click(function() {
+      $('.modal').magnificPopup('open', idx);
+    });
+  });
+
+  $('.modal').magnificPopup({
+    items: $imgs,
+    type: 'image',
+    closeOnContentClick: true,
+    mainClass: 'mfp-img-mobile',
+    image: {
+      verticalFit: true
+    }
+    
+  });
+</script>
+
+      </div>
+    </main><footer class="site-footer">
+  <div class="wrapper">
+    <div class="credits"><a href="https://github.com/bitbrain/jekyll-dash">dash</a> theme for Jekyll by <a href="https://github.com/bitbrain">bitbrain</a> made with <i class="fas fa-heart"></i><div class="toggleWrapper">
+    <input type="checkbox" class="dn" id="theme-toggle" onclick="modeSwitcher()" checked />
+    <label for="theme-toggle" class="toggle">
+    <span class="toggle__handler">
+      <span class="crater crater--1"></span>
+      <span class="crater crater--2"></span>
+      <span class="crater crater--3"></span>
+    </span>
+        <span class="star star--1"></span>
+        <span class="star star--2"></span>
+        <span class="star star--3"></span>
+        <span class="star star--4"></span>
+        <span class="star star--5"></span>
+        <span class="star star--6"></span>
+    </label>
+</div>
+<script type="text/javascript">
+const theme = localStorage.getItem('theme');
+
+if (theme === "light") {
+    document.documentElement.setAttribute('data-theme', 'light');
+} else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+}
+const userPrefers = getComputedStyle(document.documentElement).getPropertyValue('content');
+
+function activateDarkTheme() {
+    document.getElementById('theme-toggle').checked = true;
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.classList.add('theme--dark');
+    document.documentElement.classList.remove('theme--light');
+	document.getElementById("theme-toggle").className = 'light';
+	window.localStorage.setItem('theme', 'dark');
+}
+
+function activateLightTheme() {
+    document.getElementById('theme-toggle').checked = false;
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.documentElement.classList.add('theme--light');
+    document.documentElement.classList.remove('theme--dark');
+	document.getElementById("theme-toggle").className = 'dark';
+	window.localStorage.setItem('theme', 'light');
+}
+
+if (theme === "dark") {
+    activateDarkTheme();
+} else if (theme === "light") {
+    activateLightTheme();
+} else if  (userPrefers === "light") {
+    activateDarkTheme();
+} else {
+    activateDarkTheme();
+}
+
+function modeSwitcher() {
+	let currentMode = document.documentElement.getAttribute('data-theme');
+	if (currentMode === "dark") {
+	    activateLightTheme();
+	} else {
+	    activateDarkTheme();
+	}
+}
+</script></div>
+  </div>
+</footer>
+
+
+<script>
+      window.FontAwesomeConfig = {
+        searchPseudoElements: true
+      }
+    </script>
+  </body>
+
+</html>
