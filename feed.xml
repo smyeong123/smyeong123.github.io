@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://smyeong123.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smyeong123.github.io/" rel="alternate" type="text/html" /><updated>2025-05-04T00:46:47+00:00</updated><id>https://smyeong123.github.io/feed.xml</id><title type="html">smyeong123</title><subtitle>I am a Bachelor of Science graduate at the University of Sydney, majoring in Computer Science with a minor in Software Development.  My interests include backend development in Java, as well as artificial intelligence, particularly in natural language processing (NLP), computer vision (CV), and multimodal learning.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://smyeong123.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smyeong123.github.io/" rel="alternate" type="text/html" /><updated>2025-05-04T03:59:39+00:00</updated><id>https://smyeong123.github.io/feed.xml</id><title type="html">smyeong123</title><subtitle>I am a Bachelor of Science graduate at the University of Sydney, majoring in Computer Science with a minor in Software Development.  My interests include backend development in Java, as well as artificial intelligence, particularly in natural language processing (NLP), computer vision (CV), and multimodal learning.
 </subtitle><author><name>Sangmyeong Lee</name></author><entry><title type="html">[KR] 백준 14003 - 가장 긴 증가하는 부분 수열 5</title><link href="https://smyeong123.github.io/2025/02/01/14003-solution.html" rel="alternate" type="text/html" title="[KR] 백준 14003 - 가장 긴 증가하는 부분 수열 5" /><published>2025-02-01T00:00:00+00:00</published><updated>2025-02-01T00:00:00+00:00</updated><id>https://smyeong123.github.io/2025/02/01/14003-solution</id><content type="html" xml:base="https://smyeong123.github.io/2025/02/01/14003-solution.html"><![CDATA[<h1 id="백준-14003---가장-긴-증가하는-부분-수열-5">백준 14003 - 가장 긴 증가하는 부분 수열 5</h1>
+
 <blockquote>
   <p>이글을 읽으면 LIS(Longest Increasing Sequence) 알고리즘을 이해 할 수 있고 관련 문제를 풀 수 있습니다.</p>
 </blockquote>
 
 <h2 id="문제-리스트">문제 리스트</h2>
+
 <ul>
   <li><a href="https://www.acmicpc.net/problem/11053">가장 큰 증가하는 부분 수열 - 11053</a></li>
   <li><a href="https://www.acmicpc.net/problem/11055">가장 큰 증가하는 부분 수열 - 11055</a></li>
@@ -13,20 +15,25 @@
 </ul>
 
 <h2 id="문제-설명">문제 설명</h2>
-<p>수열 $X$가 주어졌을때 가장 긴 증가하는 부분 수열을 구하는 문제 입니다. 
-입력으로 $X = [10, 20, 10, 30, 20, 50]$가 주어졌을때 가장 긴 증가하는 부분을 굵게 표현하자면 다음과 같습니다. $A$ = {<strong>10</strong>, <strong>20</strong>, 10, <strong>30</strong>, 20, <strong>50</strong>} 그러므로, 출력이 되어야 하는것은 최대 길이인 4와 $10, 20, 30, 50$입니다.</p>
-<h2 id="문제-풀이">문제 풀이</h2>
-<h3 id="dpmemoization--double-loop">DP(Memoization) + Double Loop</h3>
-<p>가장 쉬운 풀이 방법은 메모이제이션 방법과 이중 루프를 이용해 푸는 방법입니다. 11053풀이는 $N$ 길이로 모든 $dp$ 원소를 1으로 초기화 합니다. 여기서 $dp[i]$는 $i$번째 원소를 마지막으로 한 LIS의 길이를 저장합니다.</p>
 
-<p>그 다음 각 $i$번쨰 원소에서 전에 발생한 $j$번째 원소들을 순회 하면서 다음과 같은 점화식을 실행해 $dp[i] = max(dp[i], dp[j] + 1)\text{, where }0&lt;j&lt;i$, 가장 큰 증가하는 부분 수열의 길이를 구할 수 있습니다. 이 이중 루프의 실제 연산 횟수는 $\frac{N(N-1)}{2}$ 과 같으므로, $O(\frac{N(N-1)}{2}) = O(N^2)$입니다.</p>
+<p>수열 \(X\)가 주어졌을때 가장 긴 증가하는 부분 수열을 구하는 문제 입니다.
+입력으로 \(X = [10, 20, 10, 30, 20, 50]\)가 주어졌을때 가장 긴 증가하는 부분을 굵게 표현하자면 다음과 같습니다. \(A\) = {<strong>10</strong>, <strong>20</strong>, 10, <strong>30</strong>, 20, <strong>50</strong>} 그러므로, 출력이 되어야 하는것은 최대 길이인 4와 \(10, 20, 30, 50\)입니다.</p>
+
+<h2 id="문제-풀이">문제 풀이</h2>
+
+<h3 id="dpmemoization--double-loop">DP(Memoization) + Double Loop</h3>
+
+<p>가장 쉬운 풀이 방법은 메모이제이션 방법과 이중 루프를 이용해 푸는 방법입니다. 11053풀이는 \(N\) 길이로 모든 \(dp\) 원소를 1으로 초기화 합니다. 여기서 \(dp[i]\)는 \(i\)번째 원소를 마지막으로 한 LIS의 길이를 저장합니다.</p>
+
+<p>그 다음 각 \(i\)번쨰 원소에서 전에 발생한 \(j\)번째 원소들을 순회 하면서 다음과 같은 점화식을 실행해 \(dp[i] = max(dp[i], dp[j] + 1)\text{, where }0&lt;j&lt;i\), 가장 큰 증가하는 부분 수열의 길이를 구할 수 있습니다. 이 이중 루프의 실제 연산 횟수는 \(\frac{N(N-1)}{2}\) 과 같으므로, \(O(\frac{N(N-1)}{2}) = O(N^2)\)입니다.</p>
 
 <h3 id="binary-search--traceback">Binary Search + Traceback</h3>
+
 <p>이제 더 효율적인 방법으로 문제를 풀어보겠습니다. 이 방법은 이분탐색과 역추적(traceback)을 활용해서 푸는 방법으로 크게 두가지로 나눌 수 있습니다.
 우선 <code class="language-plaintext highlighter-rouge">dp</code> 배열을 사용해 길이별 증가 수열의 최소 마지막 값을 추적합니다.
-즉, <code class="language-plaintext highlighter-rouge">dp[i]</code>는 길이 $i+1$인 수열 중에서 가장 마지막 값이 가장 작은 수를 의미합니다.</p>
+즉, <code class="language-plaintext highlighter-rouge">dp[i]</code>는 길이 \(i+1\)인 수열 중에서 가장 마지막 값이 가장 작은 수를 의미합니다.</p>
 
-<p>이 과정을 통해 $O(N log N)$ 시간 내에 LIS 길이를 구할 수 있고,
+<p>이 과정을 통해 \(O(N log N)\) 시간 내에 LIS 길이를 구할 수 있고,
 동시에 position[i] 배열을 만들어 각 원소가 몇 번째 길이에 해당하는 수인지 기록합니다.</p>
 
 <p>LIS 길이를 구한 후, 원래 수열을 뒤에서부터 탐색하면서 다음 조건을 만족하는 원소를 찾습니다:</p>
@@ -34,6 +41,7 @@
 <p><code class="language-plaintext highlighter-rouge">position[i]</code> == <code class="language-plaintext highlighter-rouge">현재 기대하는 길이 - 1</code></p>
 
 <p>예를 들어 LIS의 길이가 4라면, 우리는 다음과 같이 찾습니다:</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>position[i] == 3
 
 position[i] == 2
@@ -51,12 +59,13 @@ position[i] == 0
 
 <p>LIS는 단순히 수만 증가하는 게 아니라, 인덱스 조건도 만족해야 합니다:</p>
 
-<p>$i &lt; j$ 이면서 <code class="language-plaintext highlighter-rouge">X[i]</code> &lt; <code class="language-plaintext highlighter-rouge">X[j]</code></p>
+<p>\(i &lt; j\) 이면서 <code class="language-plaintext highlighter-rouge">X[i]</code> &lt; <code class="language-plaintext highlighter-rouge">X[j]</code></p>
 
 <p>앞에서부터 탐색하면 이미 선택한 값보다 작은 값을 다시 고를 가능성이 생기기 때문에,
 뒤에서부터 길이에 맞는 값을 하나씩 선택하는 게 가장 안전한 방식입니다.</p>
 
 <h2 id="예제-입력">예제 입력</h2>
+
 <p>예시로 입력이 <code class="language-plaintext highlighter-rouge">N = 8, X = 5 7 3 8 4 9 2 6</code>으로 주어지면 다음과 같은 방법으로 <code class="language-plaintext highlighter-rouge">dp</code>와 <code class="language-plaintext highlighter-rouge">position</code>이 구해지고</p>
 
 <table>
@@ -138,11 +147,11 @@ position[i] == 0
   </tbody>
 </table>
 
-<p>역순으로 X를 탐색하면서 position의 값이 <code class="language-plaintext highlighter-rouge">len(dp)-1</code> 에서 0까지 작아지는 순서로 X의 원소를 찾아 넣어줍니다. 그러면 $[9,8,7,5]$가 나오는데, 이를 뒤집어 출력합니다.</p>
+<p>역순으로 X를 탐색하면서 position의 값이 <code class="language-plaintext highlighter-rouge">len(dp)-1</code> 에서 0까지 작아지는 순서로 X의 원소를 찾아 넣어줍니다. 그러면 \([9,8,7,5]\)가 나오는데, 이를 뒤집어 출력합니다.</p>
 
 <h2 id="소스-코드">소스 코드</h2>
 
-<p>$O(N^2)$ 풀이 방법</p>
+<p>\(O(N^2)\) 풀이 방법</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># given we got N,X from the input
 </span><span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span>
@@ -153,7 +162,7 @@ position[i] == 0
 <span class="k">print</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">))</span>
 </code></pre></div></div>
 
-<p>$O(Nlog(N))$ 풀이 방법</p>
+<p>\(O(Nlog(N))\) 풀이 방법</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># given we got N,X from the input
 </span>
@@ -187,10 +196,10 @@ position[i] == 0
         <span class="n">current_length</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">current_length</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">break</span>
-            
+
 <span class="k">print</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">lis</span><span class="p">))</span>
-</code></pre></div></div>]]></content><author><name>Sangmyeong Lee</name></author><category term="PS" /><category term="DP" /><category term="LIS" /><summary type="html"><![CDATA[백준 14003 - 가장 긴 증가하는 부분 수열 5 이글을 읽으면 LIS(Longest Increasing Sequence) 알고리즘을 이해 할 수 있고 관련 문제를 풀 수 있습니다.]]></summary></entry><entry><title type="html">[KR] 백준 9935 - 문자열 폭발</title><link href="https://smyeong123.github.io/2025/01/18/9935-solution.html" rel="alternate" type="text/html" title="[KR] 백준 9935 - 문자열 폭발" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://smyeong123.github.io/2025/01/18/9935-solution</id><content type="html" xml:base="https://smyeong123.github.io/2025/01/18/9935-solution.html"><![CDATA[<h1 id="백준-9935---문자열-폭발">백준 9935 - 문자열 폭발</h1>
+</code></pre></div></div>]]></content><author><name>Sangmyeong Lee</name></author><category term="PS" /><category term="DP" /><category term="LIS" /><summary type="html"><![CDATA[백준 14003 - 가장 긴 증가하는 부분 수열 5]]></summary></entry><entry><title type="html">[KR] 백준 9935 - 문자열 폭발</title><link href="https://smyeong123.github.io/2025/01/18/9935-solution.html" rel="alternate" type="text/html" title="[KR] 백준 9935 - 문자열 폭발" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://smyeong123.github.io/2025/01/18/9935-solution</id><content type="html" xml:base="https://smyeong123.github.io/2025/01/18/9935-solution.html"><![CDATA[<h1 id="백준-9935---문자열-폭발">백준 9935 - 문자열 폭발</h1>
 <h2 id="문제-설명">문제 설명</h2>
 
 <p>주어진 문자열 <code class="language-plaintext highlighter-rouge">og_str</code>에서 특정 폭발 문자열 <code class="language-plaintext highlighter-rouge">explosive_str</code>을 찾아 제거하는 과정을 반복하여 최종적으로 남는 문자열을 구하는 문제입니다. 만약 모든 문자가 제거된다면 “FRULA”를 출력합니다.</p>
@@ -252,22 +261,22 @@ position[i] == 0
 </blockquote>
 
 <h2 id="문제-설명"><strong>문제 설명</strong></h2>
-<p>5개의 대학교에 $N$개의 버스 정류장이 있으며, 각 대학교는 자체적으로 $X$개의 버스 노선을 운영합니다.<br />
-서로 다른 대학교에서 운영하는 동일한 번호의 버스 노선은 <strong>서로 다른 노선</strong>이므로, <strong>총 $5X$개의 고유한 버스 노선이 존재</strong>합니다.</p>
+<p>5개의 대학교에 \(N\)개의 버스 정류장이 있으며, 각 대학교는 자체적으로 \(X\)개의 버스 노선을 운영합니다.<br />
+서로 다른 대학교에서 운영하는 동일한 번호의 버스 노선은 <strong>서로 다른 노선</strong>이므로, <strong>총 \(5X\)개의 고유한 버스 노선이 존재</strong>합니다.</p>
 
 <hr />
 
 <h2 id="문제-풀이"><strong>문제 풀이</strong></h2>
-<p>초기에는 BFS를 사용하여 <strong>$N \times N$ 크기의 버스 노선 정보를 기반으로 탐색</strong>하는 방식을 시도했습니다.<br />
-그러나 $N$의 최대 크기가 $100,000$으로 매우 크기 때문에, 이 방식은 <strong>비효율적이며 시간 초과가 발생</strong>합니다.<br />
-반면, $X$의 최대 크기는 $100$으로 상대적으로 작아, <strong>$X$를 기준으로 최적화하는 방법이 더 효율적</strong>임을 알 수 있습니다.</p>
+<p>초기에는 BFS를 사용하여 <strong>\(N \times N\) 크기의 버스 노선 정보를 기반으로 탐색</strong>하는 방식을 시도했습니다.<br />
+그러나 \(N\)의 최대 크기가 \(100,000\)으로 매우 크기 때문에, 이 방식은 <strong>비효율적이며 시간 초과가 발생</strong>합니다.<br />
+반면, \(X\)의 최대 크기는 \(100\)으로 상대적으로 작아, <strong>\(X\)를 기준으로 최적화하는 방법이 더 효율적</strong>임을 알 수 있습니다.</p>
 
 <p>이를 해결하기 위해, <strong>각 대학교의 버스 노선을 고유하게 변환</strong>하여 처리하였습니다.<br />
-$new_route_number = route_number + route_index * X - 1$ 연산을 사용하여 <strong>각 대학교의 노선을 고유한 번호로 매핑</strong>했습니다.</p>
+\(new\_route\_number = route\_number + route\_index * X - 1\) 연산을 사용하여 <strong>각 대학교의 노선을 고유한 번호로 매핑</strong>했습니다.</p>
 
 <h3 id="1-인접-행렬-초기화"><strong>1. 인접 행렬 초기화</strong></h3>
-<p>$5X \times 5X$ 크기의 2D <code class="language-plaintext highlighter-rouge">bus</code> 행렬을 생성하여,<br />
-정류장 $i$에서 정류장 $j$로 이동할 때 필요한 <strong>최소 환승 횟수를 저장</strong>합니다.<br />
+<p>\(5X \times 5X\) 크기의 2D <code class="language-plaintext highlighter-rouge">bus</code> 행렬을 생성하여,<br />
+정류장 \(i\)에서 정류장 \(j\)로 이동할 때 필요한 <strong>최소 환승 횟수를 저장</strong>합니다.<br />
 각 버스 노선에서 <strong>직접 연결된 정류장은 환승 없이 이동 가능</strong>하므로 <code class="language-plaintext highlighter-rouge">bus[i][j] = 1</code>로 설정합니다.</p>
 
 <hr />
@@ -279,24 +288,24 @@ $new_route_number = route_number + route_index * X - 1$ 연산을 사용하여 <
 
 <p>여기서,</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">bus[i][j]</code> : 정류장 $i$에서 정류장 $j$까지의 최소 환승 횟수</li>
-  <li><code class="language-plaintext highlighter-rouge">bus[i][k] + bus[k][j]</code> : 정류장 $i$에서 $k$를 거쳐 $j$로 가는 경우</li>
+  <li><code class="language-plaintext highlighter-rouge">bus[i][j]</code> : 정류장 \(i\)에서 정류장 \(j\)까지의 최소 환승 횟수</li>
+  <li><code class="language-plaintext highlighter-rouge">bus[i][k] + bus[k][j]</code> : 정류장 \(i\)에서 \(k\)를 거쳐 \(j\)로 가는 경우</li>
 </ul>
 
-<p>이 과정을 <strong>$5X$번 반복</strong>하여 <strong>모든 정류장 쌍 간의 최소 환승 횟수를 계산</strong>합니다.</p>
+<p>이 과정을 <strong>\(5X\)번 반복</strong>하여 <strong>모든 정류장 쌍 간의 최소 환승 횟수를 계산</strong>합니다.</p>
 
 <hr />
 
 <h3 id="3-쿼리-처리"><strong>3. 쿼리 처리</strong></h3>
-<p>Floyd-Warshall 알고리즘이 끝난 후,  질문 수 $Q$를 입력받고, 각 질문마다 <strong>출발 정류장 $U_i$와 도착 정류장 $V_i$</strong>를 받습니다.<br />
-이미 구해둔 <code class="language-plaintext highlighter-rouge">bus</code> 행렬을 활용하여 <strong>$U_i$에서 $V_i$까지 가는 최소 환승 횟수를 찾고 출력</strong>합니다.</p>
+<p>Floyd-Warshall 알고리즘이 끝난 후,  질문 수 \(Q\)를 입력받고, 각 질문마다 <strong>출발 정류장 \(U_i\)와 도착 정류장 \(V_i\)</strong>를 받습니다.<br />
+이미 구해둔 <code class="language-plaintext highlighter-rouge">bus</code> 행렬을 활용하여 <strong>\(U_i\)에서 \(V_i\)까지 가는 최소 환승 횟수를 찾고 출력</strong>합니다.</p>
 
 <hr />
 
 <h2 id="시간-복잡도-분석"><strong>시간 복잡도 분석</strong></h2>
-<p>Floyd-Warshall 알고리즘의 시간 복잡도는 <strong>$O(V^3)$</strong>이며,<br />
-여기서 $V = 5X$이므로 전체 시간 복잡도는:  $O(5X^3) = O(X^3)$
-따라서, <strong>$N$이 커도 $X$가 작기 때문에 충분히 효율적인 방식</strong>입니다.</p>
+<p>Floyd-Warshall 알고리즘의 시간 복잡도는 <strong>\(O(V^3)\)</strong>이며,<br />
+여기서 \(V = 5X\)이므로 전체 시간 복잡도는:  \(O(5X^3) = O(X^3)\)
+따라서, <strong>\(N\)이 커도 \(X\)가 작기 때문에 충분히 효율적인 방식</strong>입니다.</p>
 
 <h2 id="코드">코드</h2>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
