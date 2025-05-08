@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html class="direction--ltr"lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[EN] Linear Algebra Interview Prep | smyeong123</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="[EN] Linear Algebra Interview Prep" />
+<meta name="author" content="Sangmyeong Lee" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Linear Algebra We are going to revise Linear Algebra assuming you had learnt it before. This note aims to cover the concepts that may appear in the technical interview. What is basis of a vector? A basis of a vector space is a set of linearly independent vectors that span the entire space. Any vector in the space can be expressed as a unique linear combination of basis vectors. For example, in \(\mathbb{R}^2\) the standard basis is: [\mathbf{e}_1 = \begin{bmatrix}1 \ 0\end{bmatrix}, \quad \mathbf{e}_2 = \begin{bmatrix}0 \ 1\end{bmatrix}] What is unit vector? A unit vector is a vector with a magnitude (or length) of 1. If \(\vec{v}\) is a vector, then the unit vector \(\hat{v}\) in the direction of \(\vec{v}\) is: [\hat{v} = \frac{\vec{v}}{|\vec{v}|}] What is span of vector? The span of a set of vectors is the set of all linear combinations of those vectors. If \(\vec{v}_1, \vec{v}_2, \dots, \vec{v}_n\) are vectors, then: [\text{span}(\vec{v}1, \dots, \vec{v}_n) = \left{ \sum{i=1}^n a_i \vec{v}_i \mid a_i \in \mathbb{R} \right}] What is linearly dependent? Vectors are linearly dependent if at least one of them can be written as a linear combination of the others. Formally, vectors \(\vec{v}_1, \dots, \vec{v}_n\) are linearly dependent if [\exists \; a_1, \dots, a_n \text{ not all zero, such that } \sum_{i=1}^n a_i \vec{v}_i = 0] What is the vector space? A vector space is a collection of vectors that can be added together and multiplied by scalars, satisfying the axioms of vector addition and scalar multiplication. Examples include \(\mathbb{R}^n\), the set of all nn-dimensional real vectors. What is rank of a matrix? The rank of a matrix is the dimension of its column space (or row space). It equals the number of linearly independent columns (or rows). What are eigenvector and eigenvalue? Given a square matrix \(A\), a non-zero vector \(\vec{v}\) is an eigenvector of \(A\) if: [A\vec{v} = \lambda \vec{v}] for some scalar \(\lambda\), which is called the eigenvalue corresponding to \(\vec{v}\). What is the transpose of a matrix? The transpose of a matrix \(A\) is obtained by flipping rows and columns. If \(A = [a_{ij}]\) , then the transpose \(A^T\) is: [A^T = [a_{ji}]] What is PCA and how to compute it? Principal Component Analysis (PCA) is a technique to reduce the dimensionality of data while retaining the most variance. Steps to compute PCA: Standardise the data. Compute the covariance matrix \(\Sigma\). Perform eigen-decomposition on \(\Sigma\). Project data onto the top \(k\) eigenvectors (principal components). What is SVD (Singular Value Decomposition) and when do I use it? Singular Value Decomposition (SVD) factorizes any matrix \(A \in \mathbb{R}^{m \times n}\) into three matrices: [A = U \Sigma V^T] Where: 1. \(U\) is an \(mxm\) orthogonal matrix, 2. \(\Sigma\) is an \(mxn\) diagonal matrix with singular values 3. \(V\) is an \(nxn\) orthogonal matrix. SVD is used for: Dimensionality reduction, Noise reduction, Solving linear systems, Data compression. What does the determinant of a matrix tell you? The determinant of a square matrix tells you: Whether the matrix is invertible: \(\det(A) \ne 0\) means invertible, \(\det(A) = 0\) means singular. How the matrix scales volume: $$ \det(A) $$is the volume scaling factor. Whether the transformation preserves orientation: sign of the determinant matters. Whether the rows/columns are linearly independent: if not, the determinant is zero. Example: Determinant is Zero if Columns Are Dependent Let: $\begin{bmatrix} 1 &amp; 2 &amp; 3 4 &amp; 8 &amp; 5 7 &amp; 14 &amp; 6 \end{bmatrix}$$ Here, Column 2 is two times of Column 1, so Columns 1 and 2 are linearly dependent. Using cofactor expansion: $$ \det(A) = 1 \cdot \left| \begin{array}{cc} 8 &amp; 5 \ 14 &amp; 6 \end{array} \right| 2 \cdot \left \begin{array}{cc} 4 &amp; 5 \ 7 &amp; 6 \end{array} \right 3 \cdot \left| \begin{array}{cc} 4 &amp; 8 \ 7 &amp; 14 \end{array} \right| = 1(-22) - 2(-11) + 3(0) = -22 + 22 + 0 = 0$$ Thus, \(\det(A) = 0\)." />
+<meta property="og:description" content="Linear Algebra We are going to revise Linear Algebra assuming you had learnt it before. This note aims to cover the concepts that may appear in the technical interview. What is basis of a vector? A basis of a vector space is a set of linearly independent vectors that span the entire space. Any vector in the space can be expressed as a unique linear combination of basis vectors. For example, in \(\mathbb{R}^2\) the standard basis is: [\mathbf{e}_1 = \begin{bmatrix}1 \ 0\end{bmatrix}, \quad \mathbf{e}_2 = \begin{bmatrix}0 \ 1\end{bmatrix}] What is unit vector? A unit vector is a vector with a magnitude (or length) of 1. If \(\vec{v}\) is a vector, then the unit vector \(\hat{v}\) in the direction of \(\vec{v}\) is: [\hat{v} = \frac{\vec{v}}{|\vec{v}|}] What is span of vector? The span of a set of vectors is the set of all linear combinations of those vectors. If \(\vec{v}_1, \vec{v}_2, \dots, \vec{v}_n\) are vectors, then: [\text{span}(\vec{v}1, \dots, \vec{v}_n) = \left{ \sum{i=1}^n a_i \vec{v}_i \mid a_i \in \mathbb{R} \right}] What is linearly dependent? Vectors are linearly dependent if at least one of them can be written as a linear combination of the others. Formally, vectors \(\vec{v}_1, \dots, \vec{v}_n\) are linearly dependent if [\exists \; a_1, \dots, a_n \text{ not all zero, such that } \sum_{i=1}^n a_i \vec{v}_i = 0] What is the vector space? A vector space is a collection of vectors that can be added together and multiplied by scalars, satisfying the axioms of vector addition and scalar multiplication. Examples include \(\mathbb{R}^n\), the set of all nn-dimensional real vectors. What is rank of a matrix? The rank of a matrix is the dimension of its column space (or row space). It equals the number of linearly independent columns (or rows). What are eigenvector and eigenvalue? Given a square matrix \(A\), a non-zero vector \(\vec{v}\) is an eigenvector of \(A\) if: [A\vec{v} = \lambda \vec{v}] for some scalar \(\lambda\), which is called the eigenvalue corresponding to \(\vec{v}\). What is the transpose of a matrix? The transpose of a matrix \(A\) is obtained by flipping rows and columns. If \(A = [a_{ij}]\) , then the transpose \(A^T\) is: [A^T = [a_{ji}]] What is PCA and how to compute it? Principal Component Analysis (PCA) is a technique to reduce the dimensionality of data while retaining the most variance. Steps to compute PCA: Standardise the data. Compute the covariance matrix \(\Sigma\). Perform eigen-decomposition on \(\Sigma\). Project data onto the top \(k\) eigenvectors (principal components). What is SVD (Singular Value Decomposition) and when do I use it? Singular Value Decomposition (SVD) factorizes any matrix \(A \in \mathbb{R}^{m \times n}\) into three matrices: [A = U \Sigma V^T] Where: 1. \(U\) is an \(mxm\) orthogonal matrix, 2. \(\Sigma\) is an \(mxn\) diagonal matrix with singular values 3. \(V\) is an \(nxn\) orthogonal matrix. SVD is used for: Dimensionality reduction, Noise reduction, Solving linear systems, Data compression. What does the determinant of a matrix tell you? The determinant of a square matrix tells you: Whether the matrix is invertible: \(\det(A) \ne 0\) means invertible, \(\det(A) = 0\) means singular. How the matrix scales volume: $$ \det(A) $$is the volume scaling factor. Whether the transformation preserves orientation: sign of the determinant matters. Whether the rows/columns are linearly independent: if not, the determinant is zero. Example: Determinant is Zero if Columns Are Dependent Let: $\begin{bmatrix} 1 &amp; 2 &amp; 3 4 &amp; 8 &amp; 5 7 &amp; 14 &amp; 6 \end{bmatrix}$$ Here, Column 2 is two times of Column 1, so Columns 1 and 2 are linearly dependent. Using cofactor expansion: $$ \det(A) = 1 \cdot \left| \begin{array}{cc} 8 &amp; 5 \ 14 &amp; 6 \end{array} \right| 2 \cdot \left \begin{array}{cc} 4 &amp; 5 \ 7 &amp; 6 \end{array} \right 3 \cdot \left| \begin{array}{cc} 4 &amp; 8 \ 7 &amp; 14 \end{array} \right| = 1(-22) - 2(-11) + 3(0) = -22 + 22 + 0 = 0$$ Thus, \(\det(A) = 0\)." />
+<link rel="canonical" href="https://smyeong123.github.io/2025/03/10/Linear-Algebra.html" />
+<meta property="og:url" content="https://smyeong123.github.io/2025/03/10/Linear-Algebra.html" />
+<meta property="og:site_name" content="smyeong123" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="[EN] Linear Algebra Interview Prep" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sangmyeong Lee"},"dateModified":"2025-03-10T00:00:00+00:00","datePublished":"2025-03-10T00:00:00+00:00","description":"Linear Algebra We are going to revise Linear Algebra assuming you had learnt it before. This note aims to cover the concepts that may appear in the technical interview. What is basis of a vector? A basis of a vector space is a set of linearly independent vectors that span the entire space. Any vector in the space can be expressed as a unique linear combination of basis vectors. For example, in \\(\\mathbb{R}^2\\) the standard basis is: [\\mathbf{e}_1 = \\begin{bmatrix}1 \\ 0\\end{bmatrix}, \\quad \\mathbf{e}_2 = \\begin{bmatrix}0 \\ 1\\end{bmatrix}] What is unit vector? A unit vector is a vector with a magnitude (or length) of 1. If \\(\\vec{v}\\) is a vector, then the unit vector \\(\\hat{v}\\) in the direction of \\(\\vec{v}\\) is: [\\hat{v} = \\frac{\\vec{v}}{|\\vec{v}|}] What is span of vector? The span of a set of vectors is the set of all linear combinations of those vectors. If \\(\\vec{v}_1, \\vec{v}_2, \\dots, \\vec{v}_n\\) are vectors, then: [\\text{span}(\\vec{v}1, \\dots, \\vec{v}_n) = \\left{ \\sum{i=1}^n a_i \\vec{v}_i \\mid a_i \\in \\mathbb{R} \\right}] What is linearly dependent? Vectors are linearly dependent if at least one of them can be written as a linear combination of the others. Formally, vectors \\(\\vec{v}_1, \\dots, \\vec{v}_n\\) are linearly dependent if [\\exists \\; a_1, \\dots, a_n \\text{ not all zero, such that } \\sum_{i=1}^n a_i \\vec{v}_i = 0] What is the vector space? A vector space is a collection of vectors that can be added together and multiplied by scalars, satisfying the axioms of vector addition and scalar multiplication. Examples include \\(\\mathbb{R}^n\\), the set of all nn-dimensional real vectors. What is rank of a matrix? The rank of a matrix is the dimension of its column space (or row space). It equals the number of linearly independent columns (or rows). What are eigenvector and eigenvalue? Given a square matrix \\(A\\), a non-zero vector \\(\\vec{v}\\) is an eigenvector of \\(A\\) if: [A\\vec{v} = \\lambda \\vec{v}] for some scalar \\(\\lambda\\), which is called the eigenvalue corresponding to \\(\\vec{v}\\). What is the transpose of a matrix? The transpose of a matrix \\(A\\) is obtained by flipping rows and columns. If \\(A = [a_{ij}]\\) , then the transpose \\(A^T\\) is: [A^T = [a_{ji}]] What is PCA and how to compute it? Principal Component Analysis (PCA) is a technique to reduce the dimensionality of data while retaining the most variance. Steps to compute PCA: Standardise the data. Compute the covariance matrix \\(\\Sigma\\). Perform eigen-decomposition on \\(\\Sigma\\). Project data onto the top \\(k\\) eigenvectors (principal components). What is SVD (Singular Value Decomposition) and when do I use it? Singular Value Decomposition (SVD) factorizes any matrix \\(A \\in \\mathbb{R}^{m \\times n}\\) into three matrices: [A = U \\Sigma V^T] Where: 1. \\(U\\) is an \\(mxm\\) orthogonal matrix, 2. \\(\\Sigma\\) is an \\(mxn\\) diagonal matrix with singular values 3. \\(V\\) is an \\(nxn\\) orthogonal matrix. SVD is used for: Dimensionality reduction, Noise reduction, Solving linear systems, Data compression. What does the determinant of a matrix tell you? The determinant of a square matrix tells you: Whether the matrix is invertible: \\(\\det(A) \\ne 0\\) means invertible, \\(\\det(A) = 0\\) means singular. How the matrix scales volume: $$ \\det(A) $$is the volume scaling factor. Whether the transformation preserves orientation: sign of the determinant matters. Whether the rows/columns are linearly independent: if not, the determinant is zero. Example: Determinant is Zero if Columns Are Dependent Let: $\\begin{bmatrix} 1 &amp; 2 &amp; 3 4 &amp; 8 &amp; 5 7 &amp; 14 &amp; 6 \\end{bmatrix}$$ Here, Column 2 is two times of Column 1, so Columns 1 and 2 are linearly dependent. Using cofactor expansion: $$ \\det(A) = 1 \\cdot \\left| \\begin{array}{cc} 8 &amp; 5 \\ 14 &amp; 6 \\end{array} \\right| 2 \\cdot \\left \\begin{array}{cc} 4 &amp; 5 \\ 7 &amp; 6 \\end{array} \\right 3 \\cdot \\left| \\begin{array}{cc} 4 &amp; 8 \\ 7 &amp; 14 \\end{array} \\right| = 1(-22) - 2(-11) + 3(0) = -22 + 22 + 0 = 0$$ Thus, \\(\\det(A) = 0\\).","headline":"[EN] Linear Algebra Interview Prep","mainEntityOfPage":{"@type":"WebPage","@id":"https://smyeong123.github.io/2025/03/10/Linear-Algebra.html"},"url":"https://smyeong123.github.io/2025/03/10/Linear-Algebra.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="stylesheet" href="/assets/css/magnific-popup.css"><link type="application/atom+xml" rel="alternate" href="https://smyeong123.github.io/feed.xml" title="smyeong123" /><script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      function stripcdata(x) {
+        if (x.startsWith('% <![CDATA[') && x.endsWith('%]]>'))
+          return x.substring(11, x.length - 4);
+        return x;
+      }
+      document.querySelectorAll("script[type='math/tex']").forEach(function (el) {
+        el.outerHTML = "$(" + stripcdata(el.textContent) + "$)";
+      });
+      document.querySelectorAll("script[type='math/tex; mode=display']").forEach(function (el) {
+        el.outerHTML = "$[" + stripcdata(el.textContent) + "$]";
+      });
+      var script = document.createElement('script');
+      script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+      document.head.appendChild(script);
+    }, false);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+          integrity="sha384-INSERT_HASH_HERE"
+          crossorigin="anonymous">
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script> 
+  <script src="/assets/js/jquery.magnific-popup.js"></script>
+</head>
+<body><div class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">smyeong123<b class="command_prompt"></b><b class="blinking_cursor">_</b></a>
+    <span class="social_links">
+        
+        
+        <a class="color-cyan-hover" href="https://github.com/smyeong123"><i class="fab fa-github-square"></i></a>
+        
+        
+        
+        <a class="color-red-hover" href="https://linkedin.com/in/sangmyeong-lee-813996208"><i class="fab fa-linkedin"></i></a>
+        
+        
+    </span>
+  </div>
+</div>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        
+  <div class="author-box">
+
+
+<img src="
+    https://gravatar.com/avatar/aa28aa0a9897f29b7ef89578f5018bbb?s=256
+" class="author-avatar" alt="Avatar" />
+<div class="description">I am a Bachelor of Science graduate at the University of Sydney, majoring in Computer Science with a minor in Software Development.  My interests include backend development in Java, as well as artificial intelligence, particularly in natural language processing (NLP), computer vision (CV), and multimodal learning.
+</div>
+
+</div>
+
+
+<div class="post">
+  <h1 class="post-title">[EN] Linear Algebra Interview Prep</h1>
+  
+  <div class="post-tags">
+      
+      <a class="tag" href="/tag/cs/">CS</a>
+      
+  </div>
+  
+  <div class="post-date">
+    Published on 10 Mar 2025
+    
+  </div>
+  
+  <h1 id="linear-algebra">Linear Algebra</h1>
+
+<p>We are going to revise Linear Algebra assuming you had learnt it before.
+This note aims to cover the concepts that may appear in the technical interview.</p>
+
+<h2 id="what-is-basis-of-a-vector">What is basis of a vector?</h2>
+
+<p>A <strong>basis</strong> of a vector space is a set of linearly independent vectors that span the entire space. Any vector in the space can be expressed as a unique linear combination of basis vectors.</p>
+
+<p>For example, in \(\mathbb{R}^2\) the standard basis is:</p>
+
+\[\mathbf{e}_1 = \begin{bmatrix}1 \\ 0\end{bmatrix}, \quad \mathbf{e}_2 = \begin{bmatrix}0 \\ 1\end{bmatrix}\]
+
+<h2 id="what-is-unit-vector">What is unit vector?</h2>
+
+<p>A <strong>unit vector</strong> is a vector with a magnitude (or length) of 1.</p>
+
+<p>If \(\vec{v}\) is a vector, then the unit vector \(\hat{v}\) in the direction of \(\vec{v}\) is:</p>
+
+\[\hat{v} = \frac{\vec{v}}{\|\vec{v}\|}\]
+
+<h2 id="what-is-span-of-vector">What is span of vector?</h2>
+
+<p>The <strong>span</strong> of a set of vectors is the set of all linear combinations of those vectors.</p>
+
+<p>If \(\vec{v}_1, \vec{v}_2, \dots, \vec{v}_n\) are vectors, then:</p>
+
+\[\text{span}(\vec{v}_1, \dots, \vec{v}_n) = \left\{ \sum_{i=1}^n a_i \vec{v}_i \mid a_i \in \mathbb{R} \right\}\]
+
+<h2 id="what-is-linearly-dependent">What is linearly dependent?</h2>
+
+<p>Vectors are <strong>linearly dependent</strong> if at least one of them can be written as a linear combination of the others.</p>
+
+<p>Formally, vectors \(\vec{v}_1, \dots, \vec{v}_n\) are linearly dependent if</p>
+
+\[\exists \; a_1, \dots, a_n \text{ not all zero, such that } \sum_{i=1}^n a_i \vec{v}_i = 0\]
+
+<h2 id="what-is-the-vector-space">What is the vector space?</h2>
+
+<p>A <strong>vector space</strong> is a collection of vectors that can be added together and multiplied by scalars, satisfying the axioms of vector addition and scalar multiplication.</p>
+
+<p>Examples include \(\mathbb{R}^n\), the set of all nn-dimensional real vectors.</p>
+
+<h2 id="what-is-rank-of-a-matrix">What is rank of a matrix?</h2>
+
+<p>The <strong>rank</strong> of a matrix is the dimension of its column space (or row space).</p>
+
+<p>It equals the number of linearly independent columns (or rows).</p>
+
+<h2 id="what-are-eigenvector-and-eigenvalue">What are eigenvector and eigenvalue?</h2>
+
+<p>Given a square matrix \(A\), a non-zero vector \(\vec{v}\) is an <strong>eigenvector</strong> of \(A\) if:</p>
+
+\[A\vec{v} = \lambda \vec{v}\]
+
+<p>for some scalar \(\lambda\), which is called the <strong>eigenvalue</strong> corresponding to \(\vec{v}\).</p>
+
+<h2 id="what-is-the-transpose-of-a-matrix">What is the transpose of a matrix?</h2>
+
+<p>The <strong>transpose</strong> of a matrix \(A\) is obtained by flipping rows and columns.</p>
+
+<p>If \(A = [a_{ij}]\) , then the transpose \(A^T\) is:</p>
+
+\[A^T = [a_{ji}]\]
+
+<h2 id="what-is-pca-and-how-to-compute-it">What is PCA and how to compute it?</h2>
+
+<p><strong>Principal Component Analysis (PCA)</strong> is a technique to reduce the dimensionality of data while retaining the most variance.</p>
+
+<p>Steps to compute PCA:</p>
+
+<ol>
+  <li>Standardise the data.</li>
+  <li>Compute the covariance matrix \(\Sigma\).</li>
+  <li>Perform eigen-decomposition on \(\Sigma\).</li>
+  <li>Project data onto the top \(k\) eigenvectors (principal components).</li>
+</ol>
+
+<h2 id="what-is-svd-singular-value-decomposition-and-when-do-i-use-it">What is SVD (Singular Value Decomposition) and when do I use it?</h2>
+
+<p><strong>Singular Value Decomposition (SVD)</strong> factorizes any matrix \(A \in \mathbb{R}^{m \times n}\) into three matrices:</p>
+
+\[A = U \Sigma V^T\]
+
+<p>Where: 1. \(U\) is an \(mxm\) orthogonal matrix, 2. \(\Sigma\) is an \(mxn\) diagonal matrix with singular values 3. \(V\) is an \(nxn\) orthogonal matrix.</p>
+
+<p><strong>SVD is used for:</strong></p>
+
+<ul>
+  <li>Dimensionality reduction,</li>
+  <li>Noise reduction,</li>
+  <li>Solving linear systems,</li>
+  <li>Data compression.</li>
+</ul>
+
+<h2 id="what-does-the-determinant-of-a-matrix-tell-you">What does the determinant of a matrix tell you?</h2>
+
+<p>The <strong>determinant</strong> of a square matrix tells you:</p>
+
+<ul>
+  <li>Whether the matrix is <strong>invertible</strong>: \(\det(A) \ne 0\) means invertible, \(\det(A) = 0\) means singular.</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>How the matrix <strong>scales volume</strong>: $$</td>
+          <td>\det(A)</td>
+          <td>$$is the volume scaling factor.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>Whether the transformation <strong>preserves orientation</strong>: sign of the determinant matters.</li>
+  <li>Whether the rows/columns are <strong>linearly independent</strong>: if not, the determinant is zero.</li>
+</ul>
+
+<h2 id="example-determinant-is-zero-if-columns-are-dependent">Example: Determinant is Zero if Columns Are Dependent</h2>
+
+<p>Let:</p>
+
+<p>$\begin{bmatrix}
+1 &amp; 2 &amp; 3 <br />
+4 &amp; 8 &amp; 5 <br />
+7 &amp; 14 &amp; 6 <br />
+\end{bmatrix}$$</p>
+
+<p>Here, Column 2 is two times of Column 1, so Columns 1 and 2 are linearly dependent.</p>
+
+<p>Using cofactor expansion:
+$$
+\det(A) = 1 \cdot \left| \begin{array}{cc} 8 &amp; 5 \ 14 &amp; 6 \end{array} \right|</p>
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>2 \cdot \left</td>
+          <td>\begin{array}{cc} 4 &amp; 5 \ 7 &amp; 6 \end{array} \right</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>3 \cdot \left| \begin{array}{cc} 4 &amp; 8 \ 7 &amp; 14 \end{array} \right| <br />
+= 1(-22) - 2(-11) + 3(0) <br />
+= -22 + 22 + 0 = 0$$</li>
+</ul>
+
+<p>Thus, \(\det(A) = 0\).</p>
+
+</div>
+
+
+<div class="comments">
+<div id="disqus_thread"></div>
+<script>
+ var disqus_config = function () {
+     this.page.url = 'https://smyeong123.github.io/2025/03/10/Linear-Algebra.html';
+     this.page.identifier = '/2025/03/10/Linear-Algebra';
+     this.page.title = '[EN] Linear Algebra Interview Prep';
+ };
+
+ (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+     var d = document, s = d.createElement('script');
+
+     s.src = '//smyeong123.disqus.com/embed.js';
+
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+</div>
+
+
+
+
+<div class="related">
+  <h2>related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2025/02/01/14003-solution.html">
+            [KR] 백준 14003 - 가장 긴 증가하는 부분 수열 5
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2025/01/18/9935-solution.html">
+            [KR] 백준 9935 - 문자열 폭발
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2025/01/02/33527-solution.html">
+            [KR] 백준 33527 - 신촌 길찾기 서비스
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+  
+  <h2>all tags</h2>
+  <div class="tag-cloud"><a href="/tag/cs/" class="set-3">CS</a> <a href="/tag/dp/" class="set-1">DP</a> <a href="/tag/lis/" class="set-1">LIS</a> <a href="/tag/os/" class="set-1">OS</a> <a href="/tag/ps/" class="set-5">PS</a> <a href="/tag/folyd-warshall/" class="set-1">folyd-warshall</a> <a href="/tag/graph/" class="set-1">graph</a> <a href="/tag/stack/" class="set-1">stack</a></div>
+  
+
+
+
+
+<script>
+  let i = 0;
+  const text = '';
+  const speed = parseInt('50');
+  
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById('animated-post-description').innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+
+  document.getElementById('animated-post-description').style.display = 'initial';
+  typeWriter();
+
+  // Image modal
+  var $imgs = [];
+  $('img').each(function(idx) {
+    var obj = {
+      src: $(this).attr('src')
+    }
+    $imgs.push(obj);
+    var elem = $(this);
+    $(this).click(function() {
+      $('.modal').magnificPopup('open', idx);
+    });
+  });
+
+  $('.modal').magnificPopup({
+    items: $imgs,
+    type: 'image',
+    closeOnContentClick: true,
+    mainClass: 'mfp-img-mobile',
+    image: {
+      verticalFit: true
+    }
+    
+  });
+</script>
+
+      </div>
+    </main><footer class="site-footer">
+  <div class="wrapper">
+    <div class="credits"><a href="https://github.com/bitbrain/jekyll-dash">dash</a> theme for Jekyll by <a href="https://github.com/bitbrain">bitbrain</a> made with <i class="fas fa-heart"></i><div class="toggleWrapper">
+    <input type="checkbox" class="dn" id="theme-toggle" onclick="modeSwitcher()" checked />
+    <label for="theme-toggle" class="toggle">
+    <span class="toggle__handler">
+      <span class="crater crater--1"></span>
+      <span class="crater crater--2"></span>
+      <span class="crater crater--3"></span>
+    </span>
+        <span class="star star--1"></span>
+        <span class="star star--2"></span>
+        <span class="star star--3"></span>
+        <span class="star star--4"></span>
+        <span class="star star--5"></span>
+        <span class="star star--6"></span>
+    </label>
+</div>
+<script type="text/javascript">
+const theme = localStorage.getItem('theme');
+
+if (theme === "light") {
+    document.documentElement.setAttribute('data-theme', 'light');
+} else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+}
+const userPrefers = getComputedStyle(document.documentElement).getPropertyValue('content');
+
+function activateDarkTheme() {
+    document.getElementById('theme-toggle').checked = true;
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.classList.add('theme--dark');
+    document.documentElement.classList.remove('theme--light');
+	document.getElementById("theme-toggle").className = 'light';
+	window.localStorage.setItem('theme', 'dark');
+}
+
+function activateLightTheme() {
+    document.getElementById('theme-toggle').checked = false;
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.documentElement.classList.add('theme--light');
+    document.documentElement.classList.remove('theme--dark');
+	document.getElementById("theme-toggle").className = 'dark';
+	window.localStorage.setItem('theme', 'light');
+}
+
+if (theme === "dark") {
+    activateDarkTheme();
+} else if (theme === "light") {
+    activateLightTheme();
+} else if  (userPrefers === "light") {
+    activateDarkTheme();
+} else {
+    activateDarkTheme();
+}
+
+function modeSwitcher() {
+	let currentMode = document.documentElement.getAttribute('data-theme');
+	if (currentMode === "dark") {
+	    activateLightTheme();
+	} else {
+	    activateDarkTheme();
+	}
+}
+</script></div>
+  </div>
+</footer>
+
+
+<script>
+      window.FontAwesomeConfig = {
+        searchPseudoElements: true
+      }
+    </script>
+  </body>
+
+</html>
