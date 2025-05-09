@@ -117,6 +117,7 @@ $$\begin{bmatrix}
 Here, Column 2 is two times of Column 1, so Columns 1 and 2 are linearly dependent.
 
 Using cofactor expansion:
+
 $$
 \begin{align*}
 \det(A) = 1 \cdot \left| \begin{array}{cc} 8 & 5 \\ 14 & 6 \end{array} \right|
