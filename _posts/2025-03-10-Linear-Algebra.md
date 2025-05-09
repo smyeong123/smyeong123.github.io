@@ -100,7 +100,7 @@ Where: 1. $$U$$ is an $$mxm$$ orthogonal matrix, 2. $$\Sigma$$ is an $$mxn$$ dia
 The **determinant** of a square matrix tells you:
 
 - Whether the matrix is **invertible**: $$\det(A) \ne 0$$ means invertible, $$\det(A) = 0$$ means singular.
-- How the matrix **scales volume**: $$|\det(A)|$$is the volume scaling factor.
+- How the matrix **scales volume**: $$|\det(A)|$$ is the volume scaling factor.
 - Whether the transformation **preserves orientation**: sign of the determinant matters.
 - Whether the rows/columns are **linearly independent**: if not, the determinant is zero.
 
@@ -108,7 +108,7 @@ The **determinant** of a square matrix tells you:
 
 Let:
 
-$\begin{bmatrix}
+$$\begin{bmatrix}
 1 & 2 & 3 \\
 4 & 8 & 5 \\
 7 & 14 & 6 \\
@@ -118,10 +118,13 @@ Here, Column 2 is two times of Column 1, so Columns 1 and 2 are linearly depende
 
 Using cofactor expansion:
 $$
+\begin{align*}
 \det(A) = 1 \cdot \left| \begin{array}{cc} 8 & 5 \\ 14 & 6 \end{array} \right|
 - 2 \cdot \left| \begin{array}{cc} 4 & 5 \\ 7 & 6 \end{array} \right|
 + 3 \cdot \left| \begin{array}{cc} 4 & 8 \\ 7 & 14 \end{array} \right| \\
 = 1(-22) - 2(-11) + 3(0) \\
-= -22 + 22 + 0 = 0$$
+= -22 + 22 + 0 = 0
+\end{align*}
+$$
 
 Thus, $$\det(A) = 0$$.
