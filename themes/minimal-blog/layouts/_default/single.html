@@ -1,0 +1,22 @@
+{{ define "main" }}
+<article class="post-single">
+  <header class="post-header">
+    <h1>{{ .Title }}</h1>
+    {{- partial "article-meta.html" . -}}
+  </header>
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+  {{ $attachments := .Resources.Match "attachments/*" }}
+  {{ with $attachments }}
+  <aside class="post-attachments">
+    <h3>Attachments</h3>
+    <ul>
+      {{ range . }}
+      <li><a href="{{ .RelPermalink }}" download>{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+  </aside>
+  {{ end }}
+</article>
+{{ end }}

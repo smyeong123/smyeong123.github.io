@@ -1,0 +1,11 @@
+<div class="article-meta">
+  <time datetime="{{ .Date.Format "2006-01-02" }}">
+    {{ .Date.Format "January 2, 2006" }}
+  </time>
+  {{ with .ReadingTime }}<span class="reading-time">&middot; {{ . }} min read</span>{{ end }}
+  {{ with .Params.tags }}
+  <span class="tag-list">
+    {{ range . }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>{{ end }}
+  </span>
+  {{ end }}
+</div>

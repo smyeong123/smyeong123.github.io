@@ -1,0 +1,29 @@
+baseURL = "https://smyeong123.github.io/"
+languageCode = "en-us"
+title = "smyeong123"
+theme = "minimal-blog"
+
+[params]
+  description = "A personal blog"
+  author = "smyeong123"
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    lineNos = false
+    noClasses = false
+    style = ""
+
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[pagination]
+  pagerSize = 10
+
+[outputs]
+  home = ["HTML"]
+
+[permalinks]
+  posts = "/posts/:slug/"

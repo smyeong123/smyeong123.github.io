@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="tags-page">
+  <h1 class="page-title">{{ .Title }}</h1>
+  <p class="tags-subtitle">{{ len .Pages }} topics across all posts</p>
+  <div class="tag-cloud">
+    {{ range .Pages.ByTitle }}
+    <a href="{{ .RelPermalink }}" class="tag-cloud-item">
+      {{ .Title }} <span class="tag-count">{{ .Pages.Len }}</span>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

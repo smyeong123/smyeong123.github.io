@@ -1,0 +1,13 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="{{ "/" | relURL }}" class="site-title">{{ .Site.Title }}</a>
+    <nav class="site-nav">
+      <a href="{{ "/posts/" | relURL }}">Articles</a>
+      <a href="{{ "/tags/" | relURL }}">Tags</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </nav>
+  </div>
+</header>

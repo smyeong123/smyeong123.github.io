@@ -1,0 +1,6 @@
+name = "minimal-blog"
+license = "MIT"
+description = "A minimal, elegant custom theme for a personal blog"
+
+[author]
+  name = "smyeong123"
