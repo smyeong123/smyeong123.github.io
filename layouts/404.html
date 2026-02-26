@@ -1,0 +1,157 @@
+{{ define "main" }}
+<section class="error-404">
+  <div class="error-hero">
+    <h1 class="glitch" data-text="404">404</h1>
+    <p class="error-subtitle">Page not found in the system</p>
+  </div>
+
+  <div class="lyrics-card">
+    <div class="lyrics-lines">
+      <p class="lyric-line dim">Ooh, ah</p>
+      <p class="lyric-line dim">Ooh, ooh</p>
+      <p class="lyric-line highlight">404, not found in the system</p>
+      <p class="lyric-line">404, the new era, era</p>
+      <p class="lyric-line dim">Ooh, ah</p>
+      <p class="lyric-line dim">Ooh, ooh</p>
+      <p class="lyric-line highlight">404, not found in the system</p>
+      <p class="lyric-line">404, the new era, era</p>
+      <p class="lyric-break"></p>
+      <p class="lyric-line highlight">404, 좌표 밖의 지점</p>
+      <p class="lyric-line">404, the new era, era</p>
+      <p class="lyric-line highlight">404, 우리 신호는 question</p>
+      <p class="lyric-line">404, 안 떠 radar, radar</p>
+      <p class="lyric-line highlight">404, 백지를 내도 백 점</p>
+      <p class="lyric-line">404, the new era, era</p>
+    </div>
+    <span class="lyrics-credit">— KiiiKiii "404 (New Era)"</span>
+  </div>
+
+  <a href="/" class="back-home">Back to Home</a>
+</section>
+
+<style>
+  .error-404 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .error-hero {
+    margin-bottom: 2.5rem;
+  }
+
+  .glitch {
+    font-size: 8rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--accent), #a78bfa, var(--accent-hover));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s ease infinite;
+    position: relative;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .error-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .lyrics-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    max-width: 420px;
+    width: 100%;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .lyrics-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .lyric-line {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0;
+    transition: opacity 0.3s;
+  }
+
+  .lyric-line.dim {
+    color: var(--text-secondary);
+    opacity: 0.55;
+    font-style: italic;
+  }
+
+  .lyric-line.highlight {
+    font-weight: 600;
+  }
+
+  .lyric-break {
+    height: 0.5rem;
+    margin: 0;
+  }
+
+  .lyrics-credit {
+    display: block;
+    margin-top: 1.25rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    text-align: right;
+    font-style: italic;
+  }
+
+  .back-home {
+    display: inline-block;
+    padding: 0.65rem 1.75rem;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .back-home:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 600px) {
+    .glitch {
+      font-size: 5rem;
+    }
+
+    .lyrics-card {
+      padding: 1.5rem 1.25rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    .lyric-line {
+      font-size: 0.85rem;
+    }
+  }
+</style>
+{{ end }}

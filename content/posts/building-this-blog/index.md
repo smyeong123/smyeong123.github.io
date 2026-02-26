@@ -4,7 +4,7 @@ date: 2026-02-25T00:00:00+00:00
 draft: false
 description: "A walkthrough of how I built this personal blog — custom Hugo theme, dark mode, tag system, code copy buttons, PDF embeds, CI/CD, and more."
 tags: ["CS", "Hugo"]
-hide: false
+hide: true
 ---
 
 ## Why Hugo?
