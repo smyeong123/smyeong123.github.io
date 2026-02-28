@@ -22,7 +22,7 @@ cd smyeong123.github.io
 hugo server -D
 ```
 
-The site will be available at `http://localhost:1313/`. The `-D` flag includes draft posts.
+The site will be available at `http://localhost:1313/`. The `-D` flag includes draft posts. Posts with `hide: true` are also visible locally but hidden in production builds.
 
 ## Creating a new post
 
@@ -75,6 +75,43 @@ Hugo uses [page bundles](https://gohugo.io/content-management/page-bundles/), so
 | Shared / global PDFs | `static/pdf/` | `{{</* pdf src="/pdf/my-file.pdf" */>}}` |
 
 Prefer keeping files inside the post's own folder (`content/posts/my-post/`) so each post is self-contained. Use `static/` only for assets shared across multiple posts (e.g. site logo, reusable diagrams).
+
+## Creating a photo album
+
+The archive section at `/photos/` displays photo albums grouped by trip or event.
+
+1. Create a new album folder:
+
+```bash
+mkdir content/photos/my-trip
+```
+
+2. Add an `index.md` with the following frontmatter:
+
+```yaml
+---
+title: "My Trip"
+date: 2026-01-15
+location: "Tokyo, Japan"
+description: "A short description of the album."
+cover: "cover.*"
+---
+```
+
+3. Frontmatter fields:
+   - `title` — album name
+   - `date` — date of the trip/event
+   - `location` — location shown on the album card
+   - `description` — optional description shown on the album page
+   - `cover` — glob pattern for the cover image (defaults to `cover.*`)
+
+4. Drop your photos (`.jpg`, `.png`, `.webp`) into the album folder. Name one `cover.jpg` (or `.png`/`.webp`) to use it as the album card thumbnail.
+
+5. Photos are displayed in a masonry grid with a click-to-expand lightbox (supports arrow key navigation).
+
+## LaTeX
+
+Use `$...$` for inline math and `$$...$$` (on its own line) for block equations.
 
 ## Building for production
 

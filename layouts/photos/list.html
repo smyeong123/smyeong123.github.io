@@ -1,0 +1,27 @@
+{{ define "main" }}
+<section class="archive-page">
+  <h1 class="page-title">Archive</h1>
+  <p class="archive-subtitle">Travel & life moments</p>
+
+  <div class="album-grid">
+    {{ range .Pages.ByDate.Reverse }}
+    <a href="{{ .RelPermalink }}" class="album-card">
+      {{ $cover := .Resources.GetMatch (default "cover.*" .Params.cover) }}
+      {{ if $cover }}
+      {{ $resized := $cover.Fill "640x420 Center" }}
+      <img src="{{ $resized.RelPermalink }}" alt="{{ .Title }}" class="album-cover" loading="lazy">
+      {{ else }}
+      <div class="album-cover album-cover-placeholder"></div>
+      {{ end }}
+      <div class="album-overlay">
+        <h2 class="album-title">{{ .Title }}</h2>
+        <div class="album-meta">
+          {{ with .Params.location }}<span class="album-location">{{ . }}</span>{{ end }}
+          <time>{{ .Date.Format "Jan 2006" }}</time>
+        </div>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

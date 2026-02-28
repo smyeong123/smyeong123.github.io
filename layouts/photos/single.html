@@ -1,0 +1,90 @@
+{{ define "main" }}
+<article class="album-single">
+  <header class="album-header">
+    <a href="{{ "/photos/" | relURL }}" class="album-back">&larr; Archive</a>
+    <h1>{{ .Title }}</h1>
+    <div class="album-header-meta">
+      {{ with .Params.location }}<span class="album-location">{{ . }}</span>{{ end }}
+      <time>{{ .Date.Format "January 2, 2006" }}</time>
+    </div>
+    {{ with .Description }}<p class="album-description">{{ . }}</p>{{ end }}
+  </header>
+
+  {{ with .Content }}
+  <div class="post-content">{{ . }}</div>
+  {{ end }}
+
+  {{ $images := .Resources.Match "*.{jpg,jpeg,png,gif,webp}" }}
+  {{ if $images }}
+  <div class="photo-grid">
+    {{ range $index, $img := $images }}
+    {{ $thumb := $img.Fill "800x600 Center" }}
+    <figure class="photo-item" data-index="{{ $index }}">
+      <img src="{{ $thumb.RelPermalink }}" alt="{{ $img.Name }}" loading="lazy" data-full="{{ $img.RelPermalink }}">
+    </figure>
+    {{ end }}
+  </div>
+
+  <dialog class="lightbox" id="lightbox">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
+      <img class="lightbox-img" src="" alt="">
+      <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
+    </div>
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <span class="lightbox-counter"></span>
+  </dialog>
+
+  <script>
+    (function() {
+      var dialog = document.getElementById('lightbox');
+      var img = dialog.querySelector('.lightbox-img');
+      var counter = dialog.querySelector('.lightbox-counter');
+      var items = document.querySelectorAll('.photo-item');
+      var current = 0;
+      var total = items.length;
+
+      function show(index) {
+        current = (index + total) % total;
+        var src = items[current].querySelector('img').getAttribute('data-full');
+        img.src = src;
+        counter.textContent = (current + 1) + ' / ' + total;
+        if (!dialog.open) dialog.showModal();
+      }
+
+      items.forEach(function(item) {
+        item.addEventListener('click', function() {
+          show(parseInt(item.getAttribute('data-index')));
+        });
+      });
+
+      dialog.querySelector('.lightbox-prev').addEventListener('click', function(e) {
+        e.stopPropagation();
+        show(current - 1);
+      });
+
+      dialog.querySelector('.lightbox-next').addEventListener('click', function(e) {
+        e.stopPropagation();
+        show(current + 1);
+      });
+
+      dialog.querySelector('.lightbox-close').addEventListener('click', function() {
+        dialog.close();
+      });
+
+      dialog.querySelector('.lightbox-backdrop').addEventListener('click', function() {
+        dialog.close();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (!dialog.open) return;
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+        if (e.key === 'Escape') dialog.close();
+      });
+    })();
+  </script>
+  {{ end }}
+</article>
+{{ end }}

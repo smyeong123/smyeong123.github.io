@@ -44,7 +44,7 @@ $$\exists \; a_1, \dots, a_n \text{ not all zero, such that } \sum_{i=1}^n a_i \
 
 ## What is the vector space?
 
-A **vector space** is a collection of vectors that can be added together and multiplied by scalars, satisfying the axioms of vector addition and scalar multiplication.
+A **vector space** is a collection of vectors that can be added together and multiplied by scalars, satisfying the axioms of vector addition and scalar multiplication. 
 
 Examples include $\mathbb{R}^n$, the set of all n-dimensional real vectors.
 
